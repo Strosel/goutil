@@ -9,9 +9,9 @@ import (
 func IndexOf(i interface{}, _arr interface{}) int {
   if !strings.Contains(fmt.Sprintf("%T", _arr), "[]"){
     panic(errors.New("IndexOf(i, arr) arr must be array/slice"))
-  }else if strings.Contains(fmt.Sprintf("%T", in), "[]"){
+  }else if strings.Contains(fmt.Sprintf("%T", i), "[]"){
     panic(errors.New("IndexOf(i, arr) in can't be array/slice"))
-  }else if fmt.Sprintf("[]%T", in) != fmt.Sprintf("%T", _arr){
+  }else if fmt.Sprintf("[]%T", i) != fmt.Sprintf("%T", _arr){
     panic(errors.New("IndexOf(i, arr) in and arr must share base type"))
   }
   arr := intoarr(_arr)
