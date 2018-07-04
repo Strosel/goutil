@@ -7,9 +7,9 @@ import (
 
 var input string
 
-func Set(_input interface{}) []interface{} {
+func Set(_input interface{}) []string {
   input := fmt.Sprintf("%v", _input)
-  arr := []interface{}
+  arr := []string{}
   for _, v := range strings.Split(input, ""){
     if !In(v, arr){
       arr = append(arr, v)
