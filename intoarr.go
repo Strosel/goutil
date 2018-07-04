@@ -1,13 +1,17 @@
 package goutil
 
-import "reflect"
+import (
+  "reflect"
+  "errors"
+)
 
 func intoarr(in interface{}) []interface{} {
   slice, success := takeArg(in, reflect.Slice)
   if !success {
-    panic()
+    panic(errors.New("Array read error"))
   }
-  arr := make([]interface{}, slice.Len())
+  c := slice.Len()
+  arr := make([]interface{}, c)
   for i := 0; i < c; i++ {
     arr[i] = slice.Index(i).Interface()
   }
