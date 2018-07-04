@@ -5,8 +5,6 @@ import (
   "fmt"
 )
 
-// var input string
-
 func Set(_input interface{}) []string {
   input := fmt.Sprintf("%v", _input)
   arr := []string{}
