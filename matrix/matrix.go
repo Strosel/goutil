@@ -71,3 +71,23 @@ func Add(m ...Matrix) Matrix {
   }
   return out
 }
+
+func Mul(m ...Matrix) Matrix {
+  for i := 1; i<len(m); i++{
+    if len(m[i-1]) != len(m[i]) || len(m[i-1][0]) != len(m[i][0]){
+      panic(dimerr)
+    }
+  }
+  out := NewMatrix(len(m[0]), len(m[0][0]), nil)
+  for i := range out{
+    out[i] = 1
+  }
+  for _, v := range m{
+    for i, w := range v{
+      for j := range w{
+        out[i][j] *= v[i][j]
+      }
+    }
+  }
+  return out
+}
