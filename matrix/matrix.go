@@ -1,12 +1,32 @@
 // https://gist.github.com/n1try/c5082f0f1db7f4abcb6d995dc275fe7f
-/* Simple Matrix multiplication and transpostion with Go */
 package matrix
 
 import (
 	"errors"
 )
 
+var (
+  dimerr = errors.New("Dimension mismatch")
+)
+
 type Matrix [][]float64
+
+func NewMatrix(r, c int, x []float64) Matrix{
+  if r < 0 || c < 0{
+    panic("Negative dimension matrix")
+  }
+  if r*c != len(x){
+    panic(dimerr)
+  }
+  if x == nil{
+    x = make([]float64, r*c)
+  }
+  out := make(Matrix, r)
+  for i := range out{
+    out[i] = x[c*i:(c*i)+c]
+  }
+  return out
+}
 
 func Transpose(x Matrix) Matrix {
 	out := make(Matrix, len(x[0]))
@@ -18,9 +38,9 @@ func Transpose(x Matrix) Matrix {
 	return out
 }
 
-func Dot(x, y Matrix) (Matrix) {
+func Dot(x, y Matrix) Matrix {
 	if len(x[0]) != len(y) {
-    panic(errors.New("Can't do matrix multiplication."))
+    panic(dimerr)
 	}
 
 	out := make(Matrix, len(x))
@@ -33,4 +53,20 @@ func Dot(x, y Matrix) (Matrix) {
 		}
 	}
 	return out
+}
+
+func Add(m ...Matrix) Matrix {
+  for i := 1; i<len(m); i++{
+    if len(m[i-1]) != len(m[i]) || len(m[i-1][0]) != len(m[i][0]){
+      panic(dimerr)
+    }
+  }
+  out := NewMatrix(len(m[0]), len(m[0][0]), nil)
+  for _, v := range m{
+    for i, w := range v{
+      for j := range w{
+        out[i][j] += v[i][j]
+      }
+    }
+  }
 }
