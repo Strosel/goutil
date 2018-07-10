@@ -69,4 +69,5 @@ func Add(m ...Matrix) Matrix {
       }
     }
   }
+  return out
 }
