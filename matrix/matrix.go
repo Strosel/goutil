@@ -3,7 +3,6 @@
 package matrix
 
 import (
-	"fmt"
 	"errors"
 )
 
@@ -11,8 +10,8 @@ type Matrix [][]float64
 
 func Transpose(x Matrix) Matrix {
 	out := make(Matrix, len(x[0]))
-	for i := 0; i < len(x); i += 1 {
-		for j := 0; j < len(x[0]); j += 1 {
+	for i := 0; i < len(x); i ++ {
+		for j := 0; j < len(x[0]); j ++ {
 			out[j] = append(out[j], x[i][j])
 		}
 	}
@@ -25,8 +24,8 @@ func Dot(x, y Matrix) (Matrix) {
 	}
 
 	out := make(Matrix, len(x))
-	for i := 0; i < len(x); i += 1 {
-		for j := 0; j < len(y); j += 1 {
+	for i := 0; i < len(x); i ++ {
+		for j := 0; j < len(y); j ++ {
 			if len(out[i]) < 1 {
 				out[i] = make([]float64, len(y))
 			}
