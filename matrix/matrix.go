@@ -15,7 +15,7 @@ func NewMatrix(r, c int, x []float64) Matrix{
   if r < 0 || c < 0{
     panic("Negative dimension matrix")
   }
-  if r*c != len(x){
+  if r*c != len(x) && x != nil{
     panic(dimerr)
   }
   if x == nil{
