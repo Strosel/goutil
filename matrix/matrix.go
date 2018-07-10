@@ -38,9 +38,9 @@ func Transpose(x Matrix) Matrix {
 	return out
 }
 
-func Dot(a, b mat.Matrix) mat.Matrix{
+func Dot(a, b Matrix) Matrix{
   // https://github.com/shiffman/Neural-Network-p5/blob/master/matrix.js
-  out := mat.NewMatrix(len(a), len(b[0]), nil)
+  out := NewMatrix(len(a), len(b[0]), nil)
   for i := 0; i < len(a); i++{
     for j := 0; j < len(b[0]); j++{
       sum := 0.0
@@ -118,5 +118,5 @@ func (m Matrix) Cols() int {
 }
 
 func (m *Matrix) T(){
-  m = Transpose(m)
+  m = &Transpose(&m)
 }
