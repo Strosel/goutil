@@ -38,20 +38,18 @@ func Transpose(x Matrix) Matrix {
 	return out
 }
 
-func Dot(x, y Matrix) Matrix {
-	if len(x[0]) != len(y) {
-    panic(dimerr)
-	}
-
-	out := make(Matrix, len(x))
-	for i := 0; i < len(x); i ++ {
-		for j := 0; j < len(y); j ++ {
-			if len(out[i]) < 1 {
-				out[i] = make([]float64, len(y))
-			}
-			out[i][j] += x[i][j] * y[j][i]
-		}
-	}
+func Dot(a, b mat.Matrix) mat.Matrix{
+  // https://github.com/shiffman/Neural-Network-p5/blob/master/matrix.js
+  out := mat.NewMatrix(len(a), len(b[0]), nil)
+  for i := 0; i < len(a); i++{
+    for j := 0; j < len(b[0]); j++{
+      sum := 0.0
+      for k := 0; k < len(a[0]); k++{
+        sum += a[i][k] * b[k][j]
+      }
+      out[i][j] = sum
+    }
+  }
 	return out
 }
 
@@ -66,6 +64,23 @@ func Add(m ...Matrix) Matrix {
     for i, w := range v{
       for j := range w{
         out[i][j] += v[i][j]
+      }
+    }
+  }
+  return out
+}
+
+func Sub(m ...Matrix) Matrix {
+  for i := 1; i<len(m); i++{
+    if len(m[i-1]) != len(m[i]) || len(m[i-1][0]) != len(m[i][0]){
+      panic(dimerr)
+    }
+  }
+  out := m[0]
+  for _, v := range m{
+    for i, w := range v{
+      for j := range w{
+        out[i][j] -= v[i][j]
       }
     }
   }
@@ -92,4 +107,16 @@ func Mul(m ...Matrix) Matrix {
     }
   }
   return out
+}
+
+func (m Matrix) Rows() int {
+  return len(m)
+}
+
+func (m Matrix) Cols() int {
+  return len(m[0])
+}
+
+func (m *Matrix) T(){
+  m = Transpose(m)
 }
