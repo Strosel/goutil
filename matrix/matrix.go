@@ -118,5 +118,6 @@ func (m Matrix) Cols() int {
 }
 
 func (m *Matrix) T(){
-  m = *Transpose(*m)
+  mm := Transpose(*m)
+  m = *mm
 }
