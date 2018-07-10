@@ -32,5 +32,5 @@ func Dot(x, y Matrix) (Matrix) {
 			out[i][j] += x[i][j] * y[j][i]
 		}
 	}
-	return out, nil
+	return out
 }
