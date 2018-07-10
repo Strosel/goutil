@@ -79,8 +79,10 @@ func Mul(m ...Matrix) Matrix {
     }
   }
   out := NewMatrix(len(m[0]), len(m[0][0]), nil)
-  for i := range out{
-    out[i] = 1.0
+  for i, v := range out{
+    for j := range v{
+      out[i][j] = 1.0
+    }
   }
   for _, v := range m{
     for i, w := range v{
