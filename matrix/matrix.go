@@ -77,9 +77,10 @@ func Sub(m ...Matrix) Matrix {
     }
   }
   out := Copy(m[0])
-  for _, v := range m{
-    for i, w := range v{
-      for j := range w{
+  for k := 1; k < len(m); k++{
+    v := m[k]
+    for i := 0; i < v.Rows(); i++{
+      for j := 0; j < v.Cols(); j++{
         out[i][j] -= v[i][j]
       }
     }
