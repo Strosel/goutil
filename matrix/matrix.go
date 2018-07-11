@@ -76,7 +76,7 @@ func Sub(m ...Matrix) Matrix {
       panic(dimerr)
     }
   }
-  out := m[0]
+  out := Copy(m[0])
   for _, v := range m{
     for i, w := range v{
       for j := range w{
@@ -120,4 +120,14 @@ func (m Matrix) Cols() int {
 func (m *Matrix) T(){
   mm := Transpose(*m)
   m = &mm
+}
+
+func Copy(m Matrix) Matrix {
+  out := NewMatrix(m.Rows(), m.Cols(), nil)
+  for i := range m.Rows(){
+    for j := range m.Cols(){
+      out[i][j] = m[i][j]
+    }
+  }
+
 }
