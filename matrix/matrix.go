@@ -129,5 +129,5 @@ func Copy(m Matrix) Matrix {
       out[i][j] = m[i][j]
     }
   }
-
+  return out
 }
