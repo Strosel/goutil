@@ -70,6 +70,16 @@ func Add(m ...Matrix) Matrix {
   return out
 }
 
+func AddVal(m Matrix, f float64) Matrix{
+  out := NewMatrix(m.Rows(), m.Cols(), nil)
+  for i := 0; i < m.Rows(); i++{
+    for j := 0; j < m.Cols(); j++{
+      out[i][j] = m[i][j] + f
+    }
+  }
+  return out
+}
+
 func Sub(m ...Matrix) Matrix {
   for i := 1; i<len(m); i++{
     if len(m[i-1]) != len(m[i]) || len(m[i-1][0]) != len(m[i][0]){
@@ -83,6 +93,26 @@ func Sub(m ...Matrix) Matrix {
       for j := 0; j < v.Cols(); j++{
         out[i][j] -= v[i][j]
       }
+    }
+  }
+  return out
+}
+
+func ValSub(f float64, m Matrix) Matrix{
+  out := NewMatrix(m.Rows(), m.Cols(), nil)
+  for i := 0; i < m.Rows(); i++{
+    for j := 0; j < m.Cols(); j++{
+      out[i][j] = f - m[i][j]
+    }
+  }
+  return out
+}
+
+func SubVal(m Matrix, f float64) Matrix{
+  out := NewMatrix(m.Rows(), m.Cols(), nil)
+  for i := 0; i < m.Rows(); i++{
+    for j := 0; j < m.Cols(); j++{
+      out[i][j] = m[i][j] - f
     }
   }
   return out
@@ -105,6 +135,16 @@ func Mul(m ...Matrix) Matrix {
       for j := range w{
         out[i][j] *= v[i][j]
       }
+    }
+  }
+  return out
+}
+
+func MulVal(m Matrix, f float64) Matrix{
+  out := NewMatrix(m.Rows(), m.Cols(), nil)
+  for i := 0; i < m.Rows(); i++{
+    for j := 0; j < m.Cols(); j++{
+      out[i][j] = m[i][j] * f
     }
   }
   return out
