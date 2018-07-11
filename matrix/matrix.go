@@ -118,10 +118,6 @@ func (m Matrix) Cols() int {
   return len(m[0])
 }
 
-func (m Matrix) T(){
-  m = Transpose(m)
-}
-
 func Copy(m Matrix) Matrix {
   out := NewMatrix(m.Rows(), m.Cols(), nil)
   for i := 0; i < m.Rows(); i++{
