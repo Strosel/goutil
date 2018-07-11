@@ -118,9 +118,8 @@ func (m Matrix) Cols() int {
   return len(m[0])
 }
 
-func (m *Matrix) T(){
-  mm := Transpose(*m)
-  m = &mm
+func (m Matrix) T(){
+  m = Transpose(m)
 }
 
 func Copy(m Matrix) Matrix {
