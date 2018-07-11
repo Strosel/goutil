@@ -124,8 +124,8 @@ func (m *Matrix) T(){
 
 func Copy(m Matrix) Matrix {
   out := NewMatrix(m.Rows(), m.Cols(), nil)
-  for i := range m.Rows(){
-    for j := range m.Cols(){
+  for i := 0; i < m.Rows(); i++{
+    for j := 0; j < m.Cols(); j++{
       out[i][j] = m[i][j]
     }
   }
