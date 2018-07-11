@@ -2,6 +2,7 @@
 package matrix
 
 import (
+  "fmt"
 	"errors"
 )
 
@@ -166,4 +167,12 @@ func Copy(m Matrix) Matrix {
     }
   }
   return out
+}
+
+func (m Matrix) String() string {
+  out := ""
+  for i := 0; i < m.Rows()-1; i++{
+    out += fmt.Sprintf("%v\n", m[i])
+  }
+  return fmt.Sprintf("[%v%v]", out, m[m.Rows()-1])
 }
