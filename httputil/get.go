@@ -15,7 +15,16 @@ func GetParamInt(r *http.Request, param string) (int, error) {
 	return 0, errors.New("No parameter named " + param)
 }
 
-func GetParamStr(r *http.Request, param string) string {
+func GetParamFloat(r *http.Request, param string) (float64, error) {
+	get, ok := r.URL.Query()[param]
+	if ok && len(get[0]) > 0 {
+		out, err := strconv.ParseFloat(string(get[0]), 64)
+		return out, err
+	}
+	return 0, errors.New("No parameter named " + param)
+}
+
+func GetParamString(r *http.Request, param string) string {
 	get, ok := r.URL.Query()[param]
 	if ok && len(get[0]) > 0 {
 		out := string(get[0])
